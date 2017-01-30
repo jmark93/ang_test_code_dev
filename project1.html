@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" ng-app="store">
   <head>
     <meta charset="UTF-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -10,8 +10,10 @@
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
 integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 <link rel="stylesheet" href="css/local.css" type="text/css">
+
   </head>
   <body>
+
 
 <header class="jumbotron" "bg-warning">
   <h1>Project 1 </h1>
@@ -26,7 +28,60 @@ integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh
 </ul>
 </nav>
 
-<main>
+<main ng-controller="StoreController as store">
+<!--  <div ng-hide="store.product.soldOut">
+  <h1>{{store.product.name}} </h1>
+  <h2> ${{store.product.price}}</h2>
+  <p> {{store.product.description}} </p>
+  <button ng-show="store.product.canPurchase"> Add to Cart </button>
+</div> -->
+
+<div>
+ <h1 class="well"> Working with an Array of Products </H1>
+    <div ng-repeat="product in store.products">
+      <h1> {{product.name}} </h1>
+      <h2> {{product.price | currency}}</h2>
+      <p> {{product.description}} </p>
+      <button ng-show="product.canPurchase">
+        Add to Cart</button>
+        <hr>
+      </div>
+
+      <div>
+        <ul class="list-group">
+          <li class="list-group-item" ng-repeat="product in store.products">
+            <h3>
+              {{product.name}}
+              <em class="pull-right">{{product.price | currency}}</em>
+            </h3>
+              <img ng-src="{{product.images[0].full}}"/>
+
+<section ng-controller="PanelController as panel">
+  <ul class="nav nav-pills">
+    <li ng-class="{active:panel.isSelected(1)}">
+       <a href ng-click="panel.selectTab(1)">Description</a></li>
+    <li ng-class="{active:panel.isSelected(2)}">
+      <a href ng-click="panel.selectTab(2)">Specifications</a></li>
+    <li ng-class="{active:panel.isSelected(3)}">
+      <a href ng-click="panel.selectTab(3)">Reviews</a></li>
+  </ul>
+
+<div class="panel" ng-show="panel.isSelected(1)">
+  <h4>Description</h4>
+  <p>{{product.description}}</p>
+</div>
+<div class="panel" ng-show="panel.isSelected(2)">
+  <h4>Specifications</h4>
+  <blockquote>None yet</blockquote>
+</div>
+<div class="panel" ng-show="panel.isSelected(3)">
+  <h4>Reviews</h4>
+  <blockquote>None yet</blockquote>
+</div>
+</section
+</li>
+</ul>
+</div>
 
 </main>
 
@@ -39,15 +94,13 @@ integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh
 <!-- JQUERY SCRIPT LIBRARIES -->
 <!-- Javascript CDN -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-<!--AngularJS CDN -->
-<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.1/angular.min.js"></script>
 <!-- Bootstrap JS -->
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
 integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
 <!-- FontAwesome -->
 <script src="https://use.fontawesome.com/0407b264ab.js"></script>
-<!-- Local Javascript-Angular -->
-<script src="js/app.js">
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.1/angular.min.js"></script>
+<script src="js/app.js"></script>
 
 
   </body>
