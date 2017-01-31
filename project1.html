@@ -15,11 +15,13 @@ integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh
   <body>
 
 
-<header class="jumbotron" "bg-warning">
+<header class="jumbotron">
+  <div class="container">
   <h1>Project 1 </h1>
+</div>
 </header>
 
-<nav>
+<nav class="container">
   <ul class="nav nav-pills">
   <li role="presentation" ><a href="start.html">Start</a></li>
   <li role="presentation" class="active"><a href="project1.html">Project 1</a></li>
@@ -27,7 +29,7 @@ integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh
   <li role="presentation"><a href="project3.html">Project 3</a></li>
 </ul>
 </nav>
-
+<div class="container">
 <main ng-controller="StoreController as store">
 <!--  <div ng-hide="store.product.soldOut">
   <h1>{{store.product.name}} </h1>
@@ -51,9 +53,10 @@ integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh
         <ul class="list-group">
           <li class="list-group-item" ng-repeat="product in store.products">
             <h3>
-              {{product.name}}
-              <em class="pull-right">{{product.price | currency}}</em>
+            {{product.name}}
+            <em class="pull-right">{{product.price | currency}}</em>
             </h3>
+
               <img ng-src="{{product.images[0].full}}"/>
 
 <section ng-controller="PanelController as panel">
@@ -76,7 +79,58 @@ integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh
 </div>
 <div class="panel" ng-show="panel.isSelected(3)">
   <h4>Reviews</h4>
-  <blockquote>None yet</blockquote>
+  <blockquote ng-repeat="review in product.reviews">
+    <strong> {{review.stars}} Stars</b>
+    {{review.body}}
+    <cite class="clearfix">-{{review.author}} on {{review.createdOn}}</cite>
+    </blockquote>
+    <!--form -->
+    <form name="reviewForm" ng-controller="ReviewController as reviewCtrl"
+    ng-submit="reviewForm.$valid && reviewCtrl.addReview(product)" novalidate>
+      <!-- Live Preview -->
+      <blockquote>
+        <strong> {{reviewCtrl.review.stars}} Stars</b>
+        {{reviewCtrl.review.body}}
+        <cite class="clearfix">-{{reviewCtrl.review.author}}</cite>
+        </blockquote>
+        <!--Review Form-->
+        <h4>Submit a Review</h4>
+        <fieldset class="form-group">
+          <select class="form-control" ng-model="reviewCtrl.review.stars"
+            ng-options="stars for stars in [5,4,3,2,1]" title="Stars" required>
+            <option value="">Rate the Product</option>
+          </select>
+        </fieldset>
+        <fieldset class="form-group">
+          <textarea class="form-control" ng-model="reviewCtrl.review.body"
+            placeholder="Write a short review fo the product" title="Review" required>
+          </textarea>
+        </fieldset>
+        <fieldset class="form-group">
+          <input type="email" ng-model="reviewCtrl.review.author" class="form-control"
+          placeholder="jimmyD@example.org" title="Email" required />
+        </fieldset>
+        <div> reviewForm is {{reviewForm.$valid}} </div>
+        <fieldset class="form-group">
+          <input type="submit" class="btn btn-primary pull-right" value="Submit Review" />
+        </fieldset>
+      </form>
+
+<!--
+      <form name="reviewForm">
+      <select ng-model="review.stars">
+        <option value="1">1 star </option>
+        <option value="2">2 stars</option>
+        <option value="3">3 stars</option>
+        <option value="4">4 stars</option>
+        <option value="5">5 stars</option>
+      </select>
+      <textarea ng-model="review.body"></textarea>
+      <label>by:</label>
+      <input ng-model="review.author" type="email" />
+      <input type="submit" value="submit" />
+    </form>
+-->
 </div>
 </section
 </li>
@@ -84,7 +138,7 @@ integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh
 </div>
 
 </main>
-
+</div>
 <footer>
 
 </footer>

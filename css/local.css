@@ -1,0 +1,13 @@
+footer {
+  background: #333;
+  width: 100%;
+  bottom: 0;
+  position: fixed;
+}
+
+.ng-invalid.ng-dirty {
+  border-color: #FA787E;
+}
+.ng-valid.ng-dirty {
+  border-color: #78FA89;
+}

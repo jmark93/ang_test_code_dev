@@ -1,5 +1,22 @@
 (function() {
   var app = angular.module('store',[]);
+
+app.directive('productTitle',function () {
+  return {
+    restrict: 'E',
+    templateUrl: 'product-title.html'
+  };
+});
+
+  app.controller("ReviewController", function() {
+    this.review = {};
+    this.addReview = function(product) {
+      this.review.createdOn = Date.now();
+      product.reviews.push(this.review);
+      this.review= {};
+    };
+  });
+
   app.controller('StoreController', function() {
     this.products = gems;
   });
@@ -22,6 +39,18 @@
       {
       full: 'graphics/dode-3-full.png',
       thumb: 'graphics/dode-3-tn.png'
+      },
+    ],
+    reviews: [
+      {
+        stars: 5,
+        body: "I love this product!",
+        author: "joe@thomas.com"
+      },
+      {
+        stars: 1,
+        body: "This product sucks",
+        author: "tim@hater.com"
       },
     ]
   },
